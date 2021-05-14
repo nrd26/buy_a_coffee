@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "945212399282",
+    "project_id": "buy-a-coffee-dc13e",
+    "storage_bucket": "buy-a-coffee-dc13e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945212399282:android:82b143b0b9441e777633ab",
+        "android_client_info": {
+          "package_name": "com.example.buy_a_coffee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945212399282-ns7llk0und5trrjultob1cc912mevpj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPnckzRroSmli7eBPTGIWf1SVYN7PTJ4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945212399282-ns7llk0und5trrjultob1cc912mevpj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
