@@ -14,8 +14,10 @@ class Wrapper extends StatelessWidget {
     print(user);
 
     //return either Home or Authenticate based on whether user signed in or not
-    return Container(
-      child: SignIn(),
-    );
+    if (user == null) {
+      return Authenticate();
+    } else {
+      return Home();
+    }
   }
 }

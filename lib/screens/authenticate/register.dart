@@ -1,19 +1,20 @@
 import 'package:buy_a_coffee/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  Register({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
+  //Global Key object helps to Track the state of the form and
+  //assigning a key to a Form helps to validate the form
   final _formkey = GlobalKey<FormState>();
 
-  //text field state
   String email = '';
   String password = '';
   String error = '';
@@ -27,14 +28,15 @@ class _SignInState extends State<SignIn> {
 
           //removes the drop shadow->no longer elevated off the screen
           elevation: 0.0,
-          title: Text('Sign in to buy a coffee'),
+          title: Text('Sign up to buy a coffee'),
           actions: <Widget>[
             FlatButton.icon(
               onPressed: () {
+                // toggleView function declared inside widget not state object so this is possible
                 widget.toggleView();
               },
               icon: Icon(Icons.person, color: Colors.white),
-              label: Text("New User?", style: TextStyle(color: Colors.white)),
+              label: Text("Sign In", style: TextStyle(color: Colors.white)),
             )
           ],
         ),
@@ -46,8 +48,7 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     SizedBox(height: 20.0),
                     TextFormField(
-                      validator: (val) =>
-                          val.isEmpty ? 'Enter your email' : null,
+                      validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val) {
                         setState(() => email = val);
                       },
@@ -66,16 +67,18 @@ class _SignInState extends State<SignIn> {
                     RaisedButton(
                         color: Colors.pink[400],
                         child: Text(
-                          "Sign In",
+                          "Register",
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
+                          //Validates the form based on the state of
+                          //validators present in the text fields
                           if (_formkey.currentState.validate()) {
                             dynamic result = await _auth
-                                .signInWithEmailAndPassword(email, password);
+                                .registerWithEmailAndPassword(email, password);
                             if (result == null) {
-                              setState(() => error =
-                                  'Could not sign in with those credentials');
+                              setState(
+                                  () => error = 'Please provide a valid email');
                             }
                           }
                         }),

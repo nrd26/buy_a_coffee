@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Buy a Coffee',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(),
+        // theme: ThemeData.dark(),
         home: Wrapper(),
       ),
     );
