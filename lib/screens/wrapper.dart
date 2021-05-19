@@ -1,6 +1,5 @@
 import 'package:buy_a_coffee/models/user.dart';
 import 'package:buy_a_coffee/screens/authenticate/authenticate.dart';
-import 'package:buy_a_coffee/screens/authenticate/sign_in.dart';
 import 'package:buy_a_coffee/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

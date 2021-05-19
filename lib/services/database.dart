@@ -1,3 +1,4 @@
+import 'package:buy_a_coffee/models/brew.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -19,9 +20,20 @@ class DatabaseService {
     //'firestore parameter': value got from user
   }
 
-  //Creates a stream for the brews which returns a snapshot of data
-  //change everytime the user changes data
-  Stream<QuerySnapshot> get brews {
-    return brewCollection.snapshots();
+  //brew list from snapshot
+  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+    //each doc in snapshot documents
+    return snapshot.documents.map((doc) {
+      return Brew(
+          // If name not given then return empty string
+          name: doc.data['name'] ?? '',
+          strength: doc.data['strength'] ?? 0,
+          sugars: doc.data['sugars'] ?? '0');
+    }).toList();
+  }
+
+  //Creates a stream for the brews which returns the brew
+  Stream<List<Brew>> get brews {
+    return brewCollection.snapshots().map(_brewListFromSnapshot);
   }
 }
