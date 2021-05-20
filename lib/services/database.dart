@@ -1,5 +1,6 @@
 import 'package:buy_a_coffee/models/brew.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:buy_a_coffee/models/user.dart';
 
 class DatabaseService {
   final String uid;
@@ -13,7 +14,7 @@ class DatabaseService {
 
 //Takes user's uid associated with FirebaseUser and associates that to
 //a document in firestore which stores the user's preferences for coffee
-  Future updateUserData(String sugars, String name, int strength) async {
+  Future<void> updateUserData(String sugars, String name, int strength) async {
     return await brewCollection
         .document(uid)
         .setData({'sugars': sugars, 'name': name, 'strength': strength});
@@ -32,8 +33,22 @@ class DatabaseService {
     }).toList();
   }
 
-  //Creates a stream for the brews which returns the brew
+  // user data from snapshots
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+        uid: uid,
+        name: snapshot.data['name'],
+        sugars: snapshot.data['sugars'],
+        strength: snapshot.data['strength']);
+  }
+
+  //Gets brews stream
   Stream<List<Brew>> get brews {
     return brewCollection.snapshots().map(_brewListFromSnapshot);
+  }
+
+  //Gets the user doc stream
+  Stream<UserData> get userData {
+    return brewCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
 }

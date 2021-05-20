@@ -25,7 +25,7 @@ class Home extends StatelessWidget {
 
     //Listening for Brew Lists
     return StreamProvider<List<Brew>>.value(
-      initialData: null,
+      // initialData: null,
       value: DatabaseService().brews,
       child: Scaffold(
         backgroundColor: Colors.brown[50],
@@ -49,7 +49,12 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        body: BrewList(),
+        body: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/coffee_bg.png'),
+                    fit: BoxFit.cover)),
+            child: BrewList()),
       ),
     );
   }
